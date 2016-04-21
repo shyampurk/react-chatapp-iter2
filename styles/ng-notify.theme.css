@@ -1,0 +1,50 @@
+.ngn {
+	padding: 8px 80px;
+}
+
+.ngn-success {
+	background-color:#4db6ac;
+	display:block;
+	opacity:1;
+    text-align: center;
+    top:0;
+	color: #FFF;
+    cursor: default;
+    font-size: 1.3em;
+    left: 0;
+    position:relative;
+    right: 0;
+}
+
+.ngn-warning {
+	background-color:#f37b1d;
+	display:block;
+	opacity:1;
+	top:0;
+	color: #FFF;
+    cursor: default;
+    font-size: 1.3em;
+    left: 0;
+    position:fixed;
+    right: 0;
+    text-align: center;
+    
+}
+
+.ngn-info {
+	background-color:#0e90d2;
+	display:block;
+	opacity:1;
+	top:0;
+	color: #FFF;
+    cursor: default;
+    font-size: 1.3em;
+    left: 0;
+    position: relative;
+    right: 0;
+    text-align: center;
+}
+
+.ngn-error {
+	background-color:#ffffff;
+}
