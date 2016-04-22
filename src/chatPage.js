@@ -131,14 +131,14 @@ var Main = React.createClass({
   _notificationSystem: null,
    scrolling:function (){
       {        var $win = $(window);
+var prevScrollHeight = $('body').get(0).scrollHeight-($win.height()+$win.innerHeight());
                  if ($win.scrollTop() == 0){
                     if(this.state.allMessagesFetched){
                       this.setState({text:'AllMessagesFetched',showResults:true});
-                      // this.scrollDown(2000);
                     }
                     else
                     {    this.setState({text:'Loading',showResults:true})
-                        this.his();
+                        this.his(prevScrollHeight);
                       }
                  }
                 
@@ -157,6 +157,13 @@ var Main = React.createClass({
             scrollTop: element.height()
         }, time);
   },  
+scrollmiddle:function(time,scrollheight)
+  { 
+   var element = $('.collection');
+        $('body').animate({
+            scrollTop:scrollheight
+        }, time);
+    },  
 
 	 sub:function(){
     this.setState({text:'',showResults:false});
@@ -185,7 +192,6 @@ var Main = React.createClass({
     }.bind(this),
 		  message : function (message, channel) {
 		  	var messages = this.state.data;
-        console.log(message,"from subscribe");
     			var newMessages = messages.concat([message]);
      		 	this.setState({data:newMessages});
      		 	this.scrollDown(400);
@@ -196,7 +202,7 @@ var Main = React.createClass({
  		});
 	 },
 
-   his:function(){
+   his:function(scrollheight){
     var defaultMessagesNumber = 20;
     var starttime= this.state.start;
     pubnub.history({
@@ -213,7 +219,14 @@ var Main = React.createClass({
         {
           this.setState({allMessagesFetched:true});
         }
+         if(scrollheight)
+        {
+          this.scrollmiddle(400,scrollheight)
+        }
+        else
+        {
           this.scrollDown(400);
+        }
         }.bind(this),
         error: function(m){
         deferred.reject(m)
@@ -233,7 +246,6 @@ var Main = React.createClass({
 
 	handleMessageSubmit :function(message){
 	var messages = this.state.data;
-  console.log(messages,"handl");
     var newMessages = messages.concat([message]);
      this.pub(message);
 	},
