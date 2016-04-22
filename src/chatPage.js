@@ -135,7 +135,7 @@ var prevScrollHeight = $('body').get(0).scrollHeight-($win.height()+$win.innerHe
                  if ($win.scrollTop() == 0){
                     if(this.state.allMessagesFetched){
                       this.setState({text:'AllMessagesFetched',showResults:true});
-                      setTimeout(()=>this.scrollDown(400),1000);
+                      setTimeout(()=>this.showstate(),2000);
                     }
                     else
                     {    this.setState({text:'Loading',showResults:true})
@@ -145,12 +145,14 @@ var prevScrollHeight = $('body').get(0).scrollHeight-($win.height()+$win.innerHe
                 
              }
     },
-
+	
     getInitialState: function()
     {
     return {data: [],user:Math.floor(Math.random()*90000) + 10000,errors:'',start:'',allMessagesFetched:false, text:'' ,showResults: false};
     },
-
+showstate:function(){
+this.setState({showResults:false});
+},
 	scrollDown:function(time)
   { this.setState({showResults:false});
 	 var element = $('.collection');
